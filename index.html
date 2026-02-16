@@ -191,28 +191,29 @@
         const data = Object.fromEntries(formData.entries());
 
         // ISTRUZIONE: Incolla qui l'URL (Webhook) che ti ha dato Zapier
-        const zapierURL = "https://hook.eu1.make.com/v8012nain277oovqwy50id4y89s5bbvx";
+        const makeURL = "https://hook.eu1.make.com/v8012nain277oovqwy50id4y89s5bbvx";
 
-        // Invio dati a Zapier
+       // Invio dati a Make
         fetch(zapierURL, {
             method: 'POST',
-            mode: 'no-cors', // Modalità necessaria per Zapier Free
-            body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Grazie ' + data.name + '! La tua richiesta è stata inviata con successo.');
+                this.reset();
+            } else {
+                throw new Error('Errore dal server');
             }
         })
-        .then(() => {
-            // Messaggio di successo
-            alert('Grazie ' + data.name + '! La tua richiesta è stata inviata con successo. Riceverai una mail di conferma a breve.');
-            this.reset();
-        })
         .catch(error => {
-            alert('Si è verificato un errore. Riprova più tardi.');
+            alert('Si è verificato un errore durante l\'invio. Riprova più tardi.');
             console.error('Errore:', error);
         })
         .finally(() => {
-            // Ripristino tasto
             btn.innerText = originalText;
             btn.disabled = false;
         });
@@ -221,5 +222,6 @@
 
 </body>
 </html>
+
 
 
