@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking.Co | Prenota il tuo soggiorno</title>
+    <style>
+        :root {
+            --blu-scuro: #002366;
+            --celeste: #87CEEB;
+            --bianco: #ffffff;
+            --grigio-chiaro: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--grigio-chiaro);
+            color: var(--blu-scuro);
+        }
+
+        header {
+            background-color: var(--blu-scuro);
+            color: var(--bianco);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 20px;
+            background: var(--bianco);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        h2 { color: var(--blu-scuro); border-bottom: 2px solid var(--celeste); padding-bottom: 10px; }
+
+        .booking-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .booking-section { grid-template-columns: 1fr; }
+        }
+
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: 1px solid var(--celeste);
+            border-radius: 8px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label { font-weight: bold; font-size: 0.9rem; }
+
+        input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline-color: var(--celeste);
+        }
+
+        button {
+            background-color: var(--blu-scuro);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--celeste);
+            color: var(--blu-scuro);
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Booking.Co</h1>
+    <p>Scegli i tuoi giorni, noi pensiamo al resto.</p>
+</header>
+
+<div class="container">
+    <div class="booking-section">
+        <div>
+            <h2>1. Controlla Disponibilità</h2>
+            <p>Consulta le date già occupate sul calendario qui sotto.</p>
+            <iframe src="https://calendar.google.com/calendar/embed?src=f376ee6e334b2fea5a125031be8c9cb2e2d83db72ce09c049070d95b3ff7a08b@group.calendar.google.com&ctz=Europe%2FRome" style="border: 0" frameborder="0" scrolling="no"></iframe>
+        </div>
+
+        <div>
+            <h2>2. Invia Richiesta</h2>
+            <form id="booking-form">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required>
+
+                <label for="surname">Cognome</label>
+                <input type="text" id="surname" name="surname" placeholder="Inserisci il tuo cognome" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="esempio@mail.com" required>
+
+                <label for="start_date">Data Inizio</label>
+                <input type="date" id="start_date" name="start_date" required>
+
+                <label for="end_date">Data Fine</label>
+                <input type="date" id="end_date" name="end_date" required>
+
+                <button type="submit">Richiedi Prenotazione</button>
+            </form>
+            <div class="info-box">
+                <strong>Nota:</strong> La prenotazione non è immediata. Riceverai una mail di conferma non appena il proprietario avrà approvato le tue date.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('booking-form').onsubmit = function(e) {
+        e.preventDefault();
+        alert('Grazie! La tua richiesta è stata inviata. Il proprietario riceverà la notifica e ti risponderà via email.');
+        // Qui si può integrare EmailJS per inviare mail reali
+    };
+</script>
+
+</body>
+</html>
