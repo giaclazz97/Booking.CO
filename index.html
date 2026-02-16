@@ -6,42 +6,51 @@
     <title>Booking.Co | Prenota il tuo soggiorno</title>
     <style>
         :root {
-            --blu-scuro: #002366;
-            --celeste: #87CEEB;
-            --bianco: #ffffff;
-            --grigio-chiaro: #f4f7f6;
+            --blu-notte: #000080; /* Blu Scuro per rifiniture */
+            --celeste-sfondo: #87CEFA; /* Celeste per lo sfondo */
+            --bianco-puro: #ffffff;
+            --azzurro-chiaro: #e1f5fe;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: var(--grigio-chiaro);
-            color: var(--blu-scuro);
+            background-color: var(--celeste-sfondo); /* Sfondo tutto celeste */
+            color: var(--blu-notte);
             line-height: 1.6;
         }
 
         header {
-            background-color: var(--blu-scuro);
-            color: var(--bianco);
-            padding: 2rem 1rem;
+            background-color: var(--blu-notte); /* Header Blu Scuro */
+            color: var(--bianco-puro);
+            padding: 2.5rem 1rem;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 4px solid var(--bianco-puro); /* Dettaglio bianco */
+        }
+
+        header p {
+            color: var(--azzurro-chiaro);
+            font-weight: 300;
         }
 
         .container {
             max-width: 1000px;
-            margin: 2rem auto;
-            padding: 20px;
-            background: var(--bianco);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 3rem auto;
+            padding: 30px;
+            background: var(--bianco-puro); /* Contenitore Bianco per contrasto */
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 2px solid var(--blu-notte); /* Rifinitura Blu Scuro */
         }
 
         h2 { 
-            color: var(--blu-scuro); 
-            border-bottom: 3px solid var(--celeste); 
-            padding-bottom: 10px;
+            color: var(--blu-notte); 
+            border-bottom: 3px solid var(--celeste-sfondo); 
+            padding-bottom: 12px;
             margin-top: 0;
+            text-transform: uppercase;
+            font-size: 1.3rem;
         }
 
         .booking-section {
@@ -54,13 +63,13 @@
             .booking-section { grid-template-columns: 1fr; }
         }
 
-        /* Stile Calendario */
         .calendar-container {
             width: 100%;
             height: 500px;
-            border: 2px solid var(--celeste);
-            border-radius: 10px;
+            border: 3px solid var(--blu-notte); /* Rifinitura calendario */
+            border-radius: 12px;
             overflow: hidden;
+            background: white;
         }
 
         iframe {
@@ -69,38 +78,38 @@
             border: none;
         }
 
-        /* Stile Modulo */
         form {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            background: #f9fbfd;
-            padding: 20px;
-            border-radius: 10px;
+            background: var(--azzurro-chiaro); /* Dettaglio azzurro chiaro nel form */
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--blu-notte);
         }
 
-        label { font-weight: bold; font-size: 0.9rem; color: var(--blu-scuro); }
+        label { font-weight: bold; font-size: 0.9rem; color: var(--blu-notte); }
 
         input {
             padding: 12px;
-            border: 1px solid #ccd6e0;
+            border: 2px solid #b0bec5;
             border-radius: 8px;
             font-size: 1rem;
-            transition: border 0.3s;
+            transition: all 0.3s;
         }
 
         input:focus {
-            border-color: var(--celeste);
+            border-color: var(--blu-notte);
             outline: none;
-            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
+            box-shadow: 0 0 8px rgba(0, 0, 128, 0.2);
         }
 
         button {
-            background-color: var(--blu-scuro);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
+            background-color: var(--blu-notte);
+            color: var(--bianco-puro);
+            padding: 18px;
+            border: 2px solid var(--bianco-puro); /* Dettaglio bianco sul tasto */
+            border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
             font-size: 1.1rem;
@@ -109,23 +118,19 @@
         }
 
         button:hover {
-            background-color: var(--celeste);
-            color: var(--blu-scuro);
-            transform: translateY(-2px);
-        }
-
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
+            background-color: #0000a0;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .info-box {
-            background-color: #eef9ff;
+            background-color: var(--bianco-puro);
             padding: 15px;
-            border-left: 5px solid var(--celeste);
+            border-left: 5px solid var(--blu-notte);
             border-radius: 4px;
             font-size: 0.85rem;
             margin-top: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
     </style>
 </head>
@@ -133,7 +138,7 @@
 
 <header>
     <h1>Booking.Co</h1>
-    <p>Verifica le date e prenota il tuo spazio in pochi clic.</p>
+    <p>Verifica le date e prenota il tuo soggiorno in pochi clic.</p>
 </header>
 
 <div class="container">
@@ -168,7 +173,7 @@
             </form>
 
             <div class="info-box">
-                <strong>Importante:</strong> La prenotazione sarà effettiva solo dopo la nostra conferma via email. Controlla la tua posta nelle prossime 24 ore.
+                <strong>Importante:</strong> La prenotazione sarà effettiva solo dopo la nostra conferma via email.
             </div>
         </div>
 
@@ -176,51 +181,45 @@
 </div>
 
 <script>
+    // Imposta data minima odierna
+    const oggi = new Date().toISOString().split('T')[0];
+    document.getElementById('start_date').setAttribute('min', oggi);
+    document.getElementById('end_date').setAttribute('min', oggi);
+
     document.getElementById('booking-form').onsubmit = function(e) {
         e.preventDefault();
         
         const btn = document.getElementById('submit-btn');
         const originalText = btn.innerText;
         
-        // Effetto caricamento sul tasto
-        btn.innerText = "Invio in corso...";
-        btn.disabled = true;
-
-        / Raccolta dati dal form
         const formData = new FormData(this);
         const data = Object.fromEntries(formData.entries());
 
-        // URL corretto di Make
+        if (data.start_date >= data.end_date) {
+            alert("La data di partenza deve essere successiva alla data di arrivo.");
+            return;
+        }
+
+        btn.innerText = "Invio in corso...";
+        btn.disabled = true;
+
         const makeURL = "https://hook.eu1.make.com/v8012nain277oovqwy50id4y89s5bbvx";
 
-        // Invio dati a Make
-        fetch(makeURL, { // <--- Qui deve esserci makeURL
+        fetch(makeURL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
         .then(response => {
-            // Se Make risponde correttamente (stato 200-299)
             if (response.ok) {
-                alert('Grazie ' + data.name + '! La tua richiesta è stata inviata con successo.');
+                alert('Grazie ' + data.name + '! Richiesta inviata. Riceverai un email di conferma.');
                 this.reset();
             } else {
-                throw new Error('Errore dal server');
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                alert('Grazie ' + data.name + '! La tua richiesta è stata inviata con successo.');
-                this.reset();
-            } else {
-                throw new Error('Errore dal server');
+                throw new Error();
             }
         })
         .catch(error => {
-            alert('Si è verificato un errore durante l\'invio. Riprova più tardi.');
-            console.error('Errore:', error);
+            alert('Errore tecnico. Riprova più tardi.');
         })
         .finally(() => {
             btn.innerText = originalText;
@@ -231,7 +230,3 @@
 
 </body>
 </html>
-
-
-
-
