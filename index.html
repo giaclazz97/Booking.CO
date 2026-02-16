@@ -186,20 +186,29 @@
         btn.innerText = "Invio in corso...";
         btn.disabled = true;
 
-        // Raccolta dati dal form
+        / Raccolta dati dal form
         const formData = new FormData(this);
         const data = Object.fromEntries(formData.entries());
 
-        // ISTRUZIONE: Incolla qui l'URL (Webhook) che ti ha dato Zapier
+        // URL corretto di Make
         const makeURL = "https://hook.eu1.make.com/v8012nain277oovqwy50id4y89s5bbvx";
 
-       // Invio dati a Make
-        fetch(zapierURL, {
+        // Invio dati a Make
+        fetch(makeURL, { // <--- Qui deve esserci makeURL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
+        })
+        .then(response => {
+            // Se Make risponde correttamente (stato 200-299)
+            if (response.ok) {
+                alert('Grazie ' + data.name + '! La tua richiesta è stata inviata con successo.');
+                this.reset();
+            } else {
+                throw new Error('Errore dal server');
+            }
         })
         .then(response => {
             if (response.ok) {
@@ -222,6 +231,7 @@
 
 </body>
 </html>
+
 
 
 
