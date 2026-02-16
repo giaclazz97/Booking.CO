@@ -17,57 +17,82 @@
             margin: 0;
             background-color: var(--grigio-chiaro);
             color: var(--blu-scuro);
+            line-height: 1.6;
         }
 
         header {
             background-color: var(--blu-scuro);
             color: var(--bianco);
-            padding: 1.5rem;
+            padding: 2rem 1rem;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 2rem auto;
             padding: 20px;
             background: var(--bianco);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        h2 { color: var(--blu-scuro); border-bottom: 2px solid var(--celeste); padding-bottom: 10px; }
+        h2 { 
+            color: var(--blu-scuro); 
+            border-bottom: 3px solid var(--celeste); 
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
 
         .booking-section {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .booking-section { grid-template-columns: 1fr; }
+        }
+
+        /* Stile Calendario */
+        .calendar-container {
+            width: 100%;
+            height: 500px;
+            border: 2px solid var(--celeste);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         iframe {
             width: 100%;
-            height: 450px;
-            border: 1px solid var(--celeste);
-            border-radius: 8px;
+            height: 100%;
+            border: none;
         }
 
+        /* Stile Modulo */
         form {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            background: #f9fbfd;
+            padding: 20px;
+            border-radius: 10px;
         }
 
-        label { font-weight: bold; font-size: 0.9rem; }
+        label { font-weight: bold; font-size: 0.9rem; color: var(--blu-scuro); }
 
         input {
             padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            outline-color: var(--celeste);
+            border: 1px solid #ccd6e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--celeste);
+            outline: none;
+            box-shadow: 0 0 5px rgba(135, 206, 235, 0.5);
         }
 
         button {
@@ -75,23 +100,32 @@
             color: white;
             padding: 15px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            transition: background 0.3s;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
         button:hover {
             background-color: var(--celeste);
             color: var(--blu-scuro);
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
 
         .info-box {
-            background-color: #e3f2fd;
+            background-color: #eef9ff;
             padding: 15px;
-            border-radius: 8px;
+            border-left: 5px solid var(--celeste);
+            border-radius: 4px;
             font-size: 0.85rem;
-            margin-top: 10px;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -99,49 +133,89 @@
 
 <header>
     <h1>Booking.Co</h1>
-    <p>Scegli i tuoi giorni, noi pensiamo al resto.</p>
+    <p>Verifica le date e prenota il tuo spazio in pochi clic.</p>
 </header>
 
 <div class="container">
     <div class="booking-section">
+        
         <div>
-            <h2>1. Controlla Disponibilità</h2>
-            <p>Consulta le date già occupate sul calendario qui sotto.</p>
-            <iframe src="https://calendar.google.com/calendar/embed?src=f376ee6e334b2fea5a125031be8c9cb2e2d83db72ce09c049070d95b3ff7a08b@group.calendar.google.com&ctz=Europe%2FRome" style="border: 0" frameborder="0" scrolling="no"></iframe>
+            <h2>1. Calendario Disponibilità</h2>
+            <div class="calendar-container">
+                <iframe src="https://calendar.google.com/calendar/embed?src=booking.costacchi@gmail.com&ctz=Europe%2FRome"></iframe>
+            </div>
         </div>
 
         <div>
             <h2>2. Invia Richiesta</h2>
             <form id="booking-form">
                 <label for="name">Nome</label>
-                <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required>
+                <input type="text" id="name" name="name" placeholder="Tuo nome" required>
 
                 <label for="surname">Cognome</label>
-                <input type="text" id="surname" name="surname" placeholder="Inserisci il tuo cognome" required>
+                <input type="text" id="surname" name="surname" placeholder="Tuo cognome" required>
 
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="esempio@mail.com" required>
+                <label for="email">Tua Email</label>
+                <input type="email" id="email" name="email" placeholder="esempio@email.it" required>
 
-                <label for="start_date">Data Inizio</label>
+                <label for="start_date">Data Arrivo</label>
                 <input type="date" id="start_date" name="start_date" required>
 
-                <label for="end_date">Data Fine</label>
+                <label for="end_date">Data Partenza</label>
                 <input type="date" id="end_date" name="end_date" required>
 
-                <button type="submit">Richiedi Prenotazione</button>
+                <button type="submit" id="submit-btn">Invia Richiesta di Prenotazione</button>
             </form>
+
             <div class="info-box">
-                <strong>Nota:</strong> La prenotazione non è immediata. Riceverai una mail di conferma non appena il proprietario avrà approvato le tue date.
+                <strong>Importante:</strong> La prenotazione sarà effettiva solo dopo la nostra conferma via email. Controlla la tua posta nelle prossime 24 ore.
             </div>
         </div>
+
     </div>
 </div>
 
 <script>
     document.getElementById('booking-form').onsubmit = function(e) {
         e.preventDefault();
-        alert('Grazie! La tua richiesta è stata inviata. Il proprietario riceverà la notifica e ti risponderà via email.');
-        // Qui si può integrare EmailJS per inviare mail reali
+        
+        const btn = document.getElementById('submit-btn');
+        const originalText = btn.innerText;
+        
+        // Effetto caricamento sul tasto
+        btn.innerText = "Invio in corso...";
+        btn.disabled = true;
+
+        // Raccolta dati dal form
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
+
+        // ISTRUZIONE: Incolla qui l'URL (Webhook) che ti ha dato Zapier
+        const zapierURL = "https://hook.eu1.make.com/v8012nain277oovqwy50id4y89s5bbvx";
+
+        // Invio dati a Zapier
+        fetch(zapierURL, {
+            method: 'POST',
+            mode: 'no-cors', // Modalità necessaria per Zapier Free
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(() => {
+            // Messaggio di successo
+            alert('Grazie ' + data.name + '! La tua richiesta è stata inviata con successo. Riceverai una mail di conferma a breve.');
+            this.reset();
+        })
+        .catch(error => {
+            alert('Si è verificato un errore. Riprova più tardi.');
+            console.error('Errore:', error);
+        })
+        .finally(() => {
+            // Ripristino tasto
+            btn.innerText = originalText;
+            btn.disabled = false;
+        });
     };
 </script>
 
