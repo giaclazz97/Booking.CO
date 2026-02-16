@@ -172,35 +172,46 @@
         e.preventDefault();
         
         const btn = document.getElementById('submit-btn');
-        const formData = new FormData(this);
+        const name = document.getElementById('name').value;
+        const surname = document.getElementById('surname').value;
+        const startDate = document.getElementById('start_date').value.replace(/-/g, '');
+        const endDate = document.getElementById('end_date').value.replace(/-/g, '');
         
-        // Conversione per massima compatibilità con Make
+        // 1. Definiamo i parametri dell'evento
+        const title = encodeURIComponent(`Soggiorno: ${name} ${surname}`);
+        const details = encodeURIComponent(`Richiesta di prenotazione inviata tramite Booking.Co`);
+        const location = encodeURIComponent(`Tua Struttura/Indirizzo`);
+        const addGuest = encodeURIComponent(`booking.costacchi@gmail.com`);
+
+        // 2. Costruiamo l'URL di Google Calendar
+        // Le date nel link devono essere in formato YYYYMMDD/YYYYMMDD
+        const gCalURL = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}&add=${addGuest}`;
+
+        // 3. Invio opzionale dei dati a Make (per il tuo database/log)
+        const formData = new FormData(this);
         const params = new URLSearchParams(formData);
-
-        btn.innerText = "Invio in corso...";
-        btn.disabled = true;
-
         const makeURL = "https://hook.eu1.make.com/v8012nain277oovqwy50id4y89s5bbvx";
 
-        // Invio con metodo GET o POST semplificato
+        btn.innerText = "Apertura Calendario...";
+        btn.disabled = true;
+
         fetch(`${makeURL}?${params.toString()}`, {
             method: 'GET',
             mode: 'no-cors'
-        })
-        .then(() => {
-            alert('Richiesta inviata con successo!');
-            this.reset();
-        })
-        .catch(() => {
-            alert('Errore nell\'invio. Riprova.');
-        })
-        .finally(() => {
+        }).finally(() => {
+            // 4. Apriamo Google Calendar in una nuova scheda
+            window.open(gCalURL, '_blank');
+            
+            alert('Stiamo aprendo il tuo Google Calendar. Clicca su "Salva" per confermare l\'invito a Booking.Co');
+            
             btn.innerText = "Invia Richiesta di Prenotazione";
             btn.disabled = false;
+            this.reset();
         });
     };
 </script>
 
 </body>
 </html>
+
 
