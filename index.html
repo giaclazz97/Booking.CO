@@ -169,7 +169,8 @@
     document.getElementById('end_date').setAttribute('min', oggi);
 
     document.getElementById('booking-form').onsubmit = function(e) {
-        // Rimuoviamo e.preventDefault() solo DOPO aver costruito il link
+        e.preventDefault(); // Impedisce il ricaricamento della pagina
+        
         const name = document.getElementById('name').value;
         const surname = document.getElementById('surname').value;
         const startDate = document.getElementById('start_date').value.replace(/-/g, '');
@@ -180,16 +181,18 @@
         const details = encodeURIComponent(`Richiesta inviata tramite Booking.Co`);
         const addGuest = encodeURIComponent(`booking.costacchi@gmail.com`);
 
-        // 2. Costruiamo l'URL di Google Calendar
-        const gCalURL = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&add=${addGuest}`;
+        // 2. Costruiamo l'URL di Google Calendar 
+        // trp=false serve a dire a Google di usare la visibilità pubblica del calendario
+        const gCalURL = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&add=${addGuest}&trp=false`;
 
-        // 3. Invece di window.open, cambiamo la destinazione della pagina corrente
-        // Questo metodo è considerato "navigazione sicura" dai browser e non viene bloccato
+        // 3. Avvisiamo l'utente e reindirizziamo
+        alert('Stiamo aprendo Google Calendar. Clicca su "Salva" per confermare la prenotazione.');
+        
+        // Apre il link nella stessa finestra (metodo più sicuro contro i blocchi pop-up)
         location.href = gCalURL;
-
-        return false; // Impedisce il ricaricamento standard del form
     };
 </script>
 
 </body>
 </html>
+
